@@ -6,12 +6,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Variables
-    [Header("Movement")]
+    [Header("Gameplay")]
     public float jumpForce;
+    public bool isDead = false;
+    [Header("Components")]
     private Animator playerAnimator;
     private Rigidbody playerRigidbody;
-    public bool isDead = false;
-    public ParticleSystem sparkles;
+    [Header("Particles")]
     public ParticleSystem smoke;
 
     // Start is called before the first frame update
@@ -19,14 +20,13 @@ public class PlayerController : MonoBehaviour
     {
         playerAnimator = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
-        sparkles.Play();
         smoke.Stop();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !isDead)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetTrigger("Death");
         isDead = true;
         Debug.Log("You Died.");
-        sparkles.Stop();
         smoke.Play();
     }
 }

@@ -5,10 +5,13 @@ using UnityEngine;
 public class ObstacleSpawnManager : MonoBehaviour
 {
     // Variables
+    [Header("Spawn Rate")]
     public float startDelay;
     public float spawnDelay;
+    [Header("Game Objects")]
     public GameObject obstacle;
     public PlayerController player;
+    [Header("Positioning")]
     private Vector3 offset;
 
     // Start is called before the first frame update
